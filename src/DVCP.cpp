@@ -12,7 +12,7 @@ Rcpp::List DVCP(int mcmc_samples,
                 int adapt,
                 int likelihood_indicator, //0: Bernoulli, 1: Gaussian
                 int h_model, //0: Indicator; 1: Linear, 2: Exponential; 3: Gaussian
-                int k_approx,
+                arma::vec approx_angles, //Degrees, Not Radians
                 arma::vec y,
                 arma::mat x,
                 arma::vec distance_to_ps,
@@ -44,6 +44,7 @@ Rcpp::List DVCP(int mcmc_samples,
 //Defining Parameters and Quantities of Interest
 int n = y.size();
 int m = unique_angles.size();
+int k_approx = approx_angles.size();
 int p_x = x.n_cols;
 arma::vec sigma2_epsilon_keep((mcmc_samples - burnin)/thin); sigma2_epsilon_keep.fill(0.00);
 arma::mat beta_keep(p_x, (mcmc_samples - burnin)/thin); beta_keep.fill(0.00);
@@ -55,7 +56,6 @@ arma::vec phi_eta_keep((mcmc_samples - burnin)/thin); phi_eta_keep.fill(0.00);
 arma::vec neg_two_loglike_keep((mcmc_samples - burnin)/thin); neg_two_loglike_keep.fill(0.00);
 
 //Approximation Information
-arma::vec approx_angles = regspace(0.00, 359.00/(k_approx - 1.00), 359.00);
 arma::mat d_a_approx(k_approx, k_approx); d_a_approx.fill(0.00);
 for(int j = 0; j < k_approx; ++j){
    for(int k = 0; k < k_approx; ++k){

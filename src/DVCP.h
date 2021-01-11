@@ -131,7 +131,7 @@ Rcpp::List DVCP(int mcmc_samples,
                 int adapt,
                 int likelihood_indicator, //0: Bernoulli, 1: Gaussian
                 int h_model, //0: Indicator; 1: Linear, 2: Exponential; 3: Gaussian
-                int k_approx,
+                arma::vec approx_angles, //Degrees, Not Radians
                 arma::vec y,
                 arma::mat x,
                 arma::vec distance_to_ps,
