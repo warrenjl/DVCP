@@ -6,55 +6,271 @@
 
 using namespace Rcpp;
 
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP _DVCP_rcpparma_hello_world() {
+// DVCP
+Rcpp::List DVCP(int mcmc_samples, int burnin, int thin, int adapt, int likelihood_indicator, int h_model, int k_approx, arma::vec y, arma::mat x, arma::vec distance_to_ps, arma::vec unique_angles, arma::vec angle_key, double metrop_var_lambda, arma::vec metrop_var_eta, double metrop_var_phi_eta, double adapt_lambda, double adapt_eta, double adapt_phi_eta, Rcpp::Nullable<double> alpha_sigma2_epsilon_prior, Rcpp::Nullable<double> beta_sigma2_epsilon_prior, Rcpp::Nullable<double> sigma2_beta_prior, Rcpp::Nullable<double> sigma2_theta_prior, Rcpp::Nullable<double> a_lambda_prior, Rcpp::Nullable<double> b_lambda_prior, Rcpp::Nullable<double> alpha_sigma2_eta_prior, Rcpp::Nullable<double> beta_sigma2_eta_prior, Rcpp::Nullable<double> alpha_phi_eta_prior, Rcpp::Nullable<double> beta_phi_eta_prior, Rcpp::Nullable<double> sigma2_epsilon_init, Rcpp::Nullable<Rcpp::NumericVector> beta_init, Rcpp::Nullable<double> theta_init, Rcpp::Nullable<double> lambda_init, Rcpp::Nullable<double> sigma2_eta_init, Rcpp::Nullable<double> phi_eta_init);
+RcppExport SEXP _DVCP_DVCP(SEXP mcmc_samplesSEXP, SEXP burninSEXP, SEXP thinSEXP, SEXP adaptSEXP, SEXP likelihood_indicatorSEXP, SEXP h_modelSEXP, SEXP k_approxSEXP, SEXP ySEXP, SEXP xSEXP, SEXP distance_to_psSEXP, SEXP unique_anglesSEXP, SEXP angle_keySEXP, SEXP metrop_var_lambdaSEXP, SEXP metrop_var_etaSEXP, SEXP metrop_var_phi_etaSEXP, SEXP adapt_lambdaSEXP, SEXP adapt_etaSEXP, SEXP adapt_phi_etaSEXP, SEXP alpha_sigma2_epsilon_priorSEXP, SEXP beta_sigma2_epsilon_priorSEXP, SEXP sigma2_beta_priorSEXP, SEXP sigma2_theta_priorSEXP, SEXP a_lambda_priorSEXP, SEXP b_lambda_priorSEXP, SEXP alpha_sigma2_eta_priorSEXP, SEXP beta_sigma2_eta_priorSEXP, SEXP alpha_phi_eta_priorSEXP, SEXP beta_phi_eta_priorSEXP, SEXP sigma2_epsilon_initSEXP, SEXP beta_initSEXP, SEXP theta_initSEXP, SEXP lambda_initSEXP, SEXP sigma2_eta_initSEXP, SEXP phi_eta_initSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpparma_hello_world());
+    Rcpp::traits::input_parameter< int >::type mcmc_samples(mcmc_samplesSEXP);
+    Rcpp::traits::input_parameter< int >::type burnin(burninSEXP);
+    Rcpp::traits::input_parameter< int >::type thin(thinSEXP);
+    Rcpp::traits::input_parameter< int >::type adapt(adaptSEXP);
+    Rcpp::traits::input_parameter< int >::type likelihood_indicator(likelihood_indicatorSEXP);
+    Rcpp::traits::input_parameter< int >::type h_model(h_modelSEXP);
+    Rcpp::traits::input_parameter< int >::type k_approx(k_approxSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type distance_to_ps(distance_to_psSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type unique_angles(unique_anglesSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type angle_key(angle_keySEXP);
+    Rcpp::traits::input_parameter< double >::type metrop_var_lambda(metrop_var_lambdaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type metrop_var_eta(metrop_var_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type metrop_var_phi_eta(metrop_var_phi_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type adapt_lambda(adapt_lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type adapt_eta(adapt_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type adapt_phi_eta(adapt_phi_etaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type alpha_sigma2_epsilon_prior(alpha_sigma2_epsilon_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type beta_sigma2_epsilon_prior(beta_sigma2_epsilon_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type sigma2_beta_prior(sigma2_beta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type sigma2_theta_prior(sigma2_theta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type a_lambda_prior(a_lambda_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type b_lambda_prior(b_lambda_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type alpha_sigma2_eta_prior(alpha_sigma2_eta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type beta_sigma2_eta_prior(beta_sigma2_eta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type alpha_phi_eta_prior(alpha_phi_eta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type beta_phi_eta_prior(beta_phi_eta_priorSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type sigma2_epsilon_init(sigma2_epsilon_initSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type beta_init(beta_initSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type theta_init(theta_initSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type lambda_init(lambda_initSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type sigma2_eta_init(sigma2_eta_initSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<double> >::type phi_eta_init(phi_eta_initSEXP);
+    rcpp_result_gen = Rcpp::wrap(DVCP(mcmc_samples, burnin, thin, adapt, likelihood_indicator, h_model, k_approx, y, x, distance_to_ps, unique_angles, angle_key, metrop_var_lambda, metrop_var_eta, metrop_var_phi_eta, adapt_lambda, adapt_eta, adapt_phi_eta, alpha_sigma2_epsilon_prior, beta_sigma2_epsilon_prior, sigma2_beta_prior, sigma2_theta_prior, a_lambda_prior, b_lambda_prior, alpha_sigma2_eta_prior, beta_sigma2_eta_prior, alpha_phi_eta_prior, beta_phi_eta_prior, sigma2_epsilon_init, beta_init, theta_init, lambda_init, sigma2_eta_init, phi_eta_init));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP _DVCP_rcpparma_outerproduct(SEXP xSEXP) {
+// beta_update
+arma::vec beta_update(arma::mat x, arma::vec indicator, arma::vec omega, arma::vec kappa, double theta, double sigma2_beta);
+RcppExport SEXP _DVCP_beta_update(SEXP xSEXP, SEXP indicatorSEXP, SEXP omegaSEXP, SEXP kappaSEXP, SEXP thetaSEXP, SEXP sigma2_betaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_outerproduct(x));
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_beta(sigma2_betaSEXP);
+    rcpp_result_gen = Rcpp::wrap(beta_update(x, indicator, omega, kappa, theta, sigma2_beta));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP _DVCP_rcpparma_innerproduct(SEXP xSEXP) {
+// eta_update
+Rcpp::List eta_update(int k_approx, arma::mat cross_a_approx, arma::mat eta_approx_corr_inv, int h_model, arma::vec distance_to_ps, arma::vec angle_key, arma::mat x, arma::vec indicator, arma::vec omega, arma::vec kappa, arma::vec beta, double theta, double lambda, arma::vec eta, arma::vec eta_approx, double sigma2_eta, double phi_eta, arma::vec metrop_var_eta, arma::vec acctot_eta);
+RcppExport SEXP _DVCP_eta_update(SEXP k_approxSEXP, SEXP cross_a_approxSEXP, SEXP eta_approx_corr_invSEXP, SEXP h_modelSEXP, SEXP distance_to_psSEXP, SEXP angle_keySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP omegaSEXP, SEXP kappaSEXP, SEXP betaSEXP, SEXP thetaSEXP, SEXP lambdaSEXP, SEXP etaSEXP, SEXP eta_approxSEXP, SEXP sigma2_etaSEXP, SEXP phi_etaSEXP, SEXP metrop_var_etaSEXP, SEXP acctot_etaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_innerproduct(x));
+    Rcpp::traits::input_parameter< int >::type k_approx(k_approxSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type cross_a_approx(cross_a_approxSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type eta_approx_corr_inv(eta_approx_corr_invSEXP);
+    Rcpp::traits::input_parameter< int >::type h_model(h_modelSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type distance_to_ps(distance_to_psSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type angle_key(angle_keySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta(etaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta_approx(eta_approxSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_eta(sigma2_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type phi_eta(phi_etaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type metrop_var_eta(metrop_var_etaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type acctot_eta(acctot_etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(eta_update(k_approx, cross_a_approx, eta_approx_corr_inv, h_model, distance_to_ps, angle_key, x, indicator, omega, kappa, beta, theta, lambda, eta, eta_approx, sigma2_eta, phi_eta, metrop_var_eta, acctot_eta));
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP _DVCP_rcpparma_bothproducts(SEXP xSEXP) {
+// indicator_fun
+arma::vec indicator_fun(int h_model, arma::vec distance_to_ps, arma::vec angle_key, double lambda, arma::vec eta);
+RcppExport SEXP _DVCP_indicator_fun(SEXP h_modelSEXP, SEXP distance_to_psSEXP, SEXP angle_keySEXP, SEXP lambdaSEXP, SEXP etaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_bothproducts(x));
+    Rcpp::traits::input_parameter< int >::type h_model(h_modelSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type distance_to_ps(distance_to_psSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type angle_key(angle_keySEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta(etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(indicator_fun(h_model, distance_to_ps, angle_key, lambda, eta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// lambda_update
+Rcpp::List lambda_update(int h_model, arma::vec distance_to_ps, arma::vec angle_key, arma::mat x, arma::vec indicator, arma::vec omega, arma::vec kappa, arma::vec beta, double theta, double lambda, arma::vec eta, double a_lambda, double b_lambda, double metrop_var_lambda, int acctot_lambda);
+RcppExport SEXP _DVCP_lambda_update(SEXP h_modelSEXP, SEXP distance_to_psSEXP, SEXP angle_keySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP omegaSEXP, SEXP kappaSEXP, SEXP betaSEXP, SEXP thetaSEXP, SEXP lambdaSEXP, SEXP etaSEXP, SEXP a_lambdaSEXP, SEXP b_lambdaSEXP, SEXP metrop_var_lambdaSEXP, SEXP acctot_lambdaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type h_model(h_modelSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type distance_to_ps(distance_to_psSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type angle_key(angle_keySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta(etaSEXP);
+    Rcpp::traits::input_parameter< double >::type a_lambda(a_lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type b_lambda(b_lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type metrop_var_lambda(metrop_var_lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type acctot_lambda(acctot_lambdaSEXP);
+    rcpp_result_gen = Rcpp::wrap(lambda_update(h_model, distance_to_ps, angle_key, x, indicator, omega, kappa, beta, theta, lambda, eta, a_lambda, b_lambda, metrop_var_lambda, acctot_lambda));
+    return rcpp_result_gen;
+END_RCPP
+}
+// neg_two_loglike_update
+double neg_two_loglike_update(int likelihood_indicator, arma::vec y, arma::mat x, arma::vec indicator, double sigma2_epsilon, arma::vec beta, double theta);
+RcppExport SEXP _DVCP_neg_two_loglike_update(SEXP likelihood_indicatorSEXP, SEXP ySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP sigma2_epsilonSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type likelihood_indicator(likelihood_indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_epsilon(sigma2_epsilonSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(neg_two_loglike_update(likelihood_indicator, y, x, indicator, sigma2_epsilon, beta, theta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// omega_update
+Rcpp::List omega_update(arma::vec y, arma::mat x, arma::vec indicator, arma::vec beta, double theta);
+RcppExport SEXP _DVCP_omega_update(SEXP ySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(omega_update(y, x, indicator, beta, theta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// phi_eta_update
+Rcpp::List phi_eta_update(arma::mat d_a_approx, arma::mat cross_a_approx, arma::mat eta_approx_corr_inv, int h_model, arma::vec distance_to_ps, arma::vec angle_key, arma::mat x, arma::vec indicator, arma::vec omega, arma::vec kappa, arma::vec beta, double theta, double lambda, arma::vec eta, arma::vec eta_approx, double sigma2_eta, double phi_eta, double alpha_phi_eta, double beta_phi_eta, double metrop_var_phi_eta, int acctot_phi_eta);
+RcppExport SEXP _DVCP_phi_eta_update(SEXP d_a_approxSEXP, SEXP cross_a_approxSEXP, SEXP eta_approx_corr_invSEXP, SEXP h_modelSEXP, SEXP distance_to_psSEXP, SEXP angle_keySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP omegaSEXP, SEXP kappaSEXP, SEXP betaSEXP, SEXP thetaSEXP, SEXP lambdaSEXP, SEXP etaSEXP, SEXP eta_approxSEXP, SEXP sigma2_etaSEXP, SEXP phi_etaSEXP, SEXP alpha_phi_etaSEXP, SEXP beta_phi_etaSEXP, SEXP metrop_var_phi_etaSEXP, SEXP acctot_phi_etaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type d_a_approx(d_a_approxSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type cross_a_approx(cross_a_approxSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type eta_approx_corr_inv(eta_approx_corr_invSEXP);
+    Rcpp::traits::input_parameter< int >::type h_model(h_modelSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type distance_to_ps(distance_to_psSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type angle_key(angle_keySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta(etaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta_approx(eta_approxSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_eta(sigma2_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type phi_eta(phi_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha_phi_eta(alpha_phi_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_phi_eta(beta_phi_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type metrop_var_phi_eta(metrop_var_phi_etaSEXP);
+    Rcpp::traits::input_parameter< int >::type acctot_phi_eta(acctot_phi_etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(phi_eta_update(d_a_approx, cross_a_approx, eta_approx_corr_inv, h_model, distance_to_ps, angle_key, x, indicator, omega, kappa, beta, theta, lambda, eta, eta_approx, sigma2_eta, phi_eta, alpha_phi_eta, beta_phi_eta, metrop_var_phi_eta, acctot_phi_eta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// rcpp_pgdraw
+arma::vec rcpp_pgdraw(double b, arma::vec c);
+RcppExport SEXP _DVCP_rcpp_pgdraw(SEXP bSEXP, SEXP cSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type c(cSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcpp_pgdraw(b, c));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sigma2_epsilon_update
+double sigma2_epsilon_update(arma::vec y, arma::mat x, arma::mat indicator, arma::vec beta, double theta, double alpha_sigma2_epsilon, double beta_sigma2_epsilon);
+RcppExport SEXP _DVCP_sigma2_epsilon_update(SEXP ySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP betaSEXP, SEXP thetaSEXP, SEXP alpha_sigma2_epsilonSEXP, SEXP beta_sigma2_epsilonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha_sigma2_epsilon(alpha_sigma2_epsilonSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_sigma2_epsilon(beta_sigma2_epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(sigma2_epsilon_update(y, x, indicator, beta, theta, alpha_sigma2_epsilon, beta_sigma2_epsilon));
+    return rcpp_result_gen;
+END_RCPP
+}
+// sigma2_eta_update
+double sigma2_eta_update(arma::mat eta_approx_corr_inv, arma::vec eta_approx, double alpha_sigma2_eta, double beta_sigma2_eta);
+RcppExport SEXP _DVCP_sigma2_eta_update(SEXP eta_approx_corr_invSEXP, SEXP eta_approxSEXP, SEXP alpha_sigma2_etaSEXP, SEXP beta_sigma2_etaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type eta_approx_corr_inv(eta_approx_corr_invSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type eta_approx(eta_approxSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha_sigma2_eta(alpha_sigma2_etaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta_sigma2_eta(beta_sigma2_etaSEXP);
+    rcpp_result_gen = Rcpp::wrap(sigma2_eta_update(eta_approx_corr_inv, eta_approx, alpha_sigma2_eta, beta_sigma2_eta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// theta_update
+double theta_update(arma::mat x, arma::vec indicator, arma::vec omega, arma::vec kappa, arma::vec beta, double sigma2_theta);
+RcppExport SEXP _DVCP_theta_update(SEXP xSEXP, SEXP indicatorSEXP, SEXP omegaSEXP, SEXP kappaSEXP, SEXP betaSEXP, SEXP sigma2_thetaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type omega(omegaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type kappa(kappaSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type sigma2_theta(sigma2_thetaSEXP);
+    rcpp_result_gen = Rcpp::wrap(theta_update(x, indicator, omega, kappa, beta, sigma2_theta));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_DVCP_rcpparma_hello_world", (DL_FUNC) &_DVCP_rcpparma_hello_world, 0},
-    {"_DVCP_rcpparma_outerproduct", (DL_FUNC) &_DVCP_rcpparma_outerproduct, 1},
-    {"_DVCP_rcpparma_innerproduct", (DL_FUNC) &_DVCP_rcpparma_innerproduct, 1},
-    {"_DVCP_rcpparma_bothproducts", (DL_FUNC) &_DVCP_rcpparma_bothproducts, 1},
+    {"_DVCP_DVCP", (DL_FUNC) &_DVCP_DVCP, 34},
+    {"_DVCP_beta_update", (DL_FUNC) &_DVCP_beta_update, 6},
+    {"_DVCP_eta_update", (DL_FUNC) &_DVCP_eta_update, 19},
+    {"_DVCP_indicator_fun", (DL_FUNC) &_DVCP_indicator_fun, 5},
+    {"_DVCP_lambda_update", (DL_FUNC) &_DVCP_lambda_update, 15},
+    {"_DVCP_neg_two_loglike_update", (DL_FUNC) &_DVCP_neg_two_loglike_update, 7},
+    {"_DVCP_omega_update", (DL_FUNC) &_DVCP_omega_update, 5},
+    {"_DVCP_phi_eta_update", (DL_FUNC) &_DVCP_phi_eta_update, 21},
+    {"_DVCP_rcpp_pgdraw", (DL_FUNC) &_DVCP_rcpp_pgdraw, 2},
+    {"_DVCP_sigma2_epsilon_update", (DL_FUNC) &_DVCP_sigma2_epsilon_update, 7},
+    {"_DVCP_sigma2_eta_update", (DL_FUNC) &_DVCP_sigma2_eta_update, 4},
+    {"_DVCP_theta_update", (DL_FUNC) &_DVCP_theta_update, 6},
     {NULL, NULL, 0}
 };
 
