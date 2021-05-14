@@ -31,7 +31,7 @@ if(h_model == 0){ //Indicator
   }
    
 if(h_model == 1){ //Linear
-  indicator = distance_to_ps%indicator_temp;
+  indicator = (1.00 - distance_to_ps)%indicator_temp;
   }
    
 if(h_model == 2){ //Exponential
