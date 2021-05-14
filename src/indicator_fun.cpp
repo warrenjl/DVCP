@@ -41,8 +41,15 @@ if(h_model == 2){ //Exponential
 if(h_model == 3){ //Gaussian
   indicator = exp(-(distance_to_ps%distance_to_ps))%indicator_temp;
   }
+
+if(h_model == 4){ //Spherical
+  indicator = (1.00 +
+               -1.50*distance_to_ps/exp(eta_full) +
+               0.50*pow((distance_to_ps/exp(eta_full)), 3))*(distance_to_ps < exp(eta_full));
+  }
  
 return indicator;
     
 }
+   
    

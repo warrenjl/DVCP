@@ -11,7 +11,7 @@ Rcpp::List DVCP(int mcmc_samples,
                 int thin,
                 int adapt,
                 int likelihood_indicator, //0: Bernoulli, 1: Gaussian
-                int h_model, //0: Indicator; 1: Linear, 2: Exponential; 3: Gaussian
+                int h_model, //0: Indicator; 1: Linear, 2: Exponential; 3: Gaussian; 4: Spherical
                 arma::vec approx_angles, //Degrees, Not Radians
                 arma::vec y,
                 arma::mat x,
@@ -230,26 +230,30 @@ for(int j = 1; j < mcmc_samples; ++j){
                         beta,
                         sigma2_theta);
    
-   //lambda Update
-   Rcpp::List lambda_output = lambda_update(h_model,
-                                            distance_to_ps,
-                                            angle_key,
-                                            x,
-                                            indicator,
-                                            omega,
-                                            kappa,
-                                            beta,
-                                            theta,
-                                            lambda,
-                                            eta,
-                                            a_lambda,
-                                            b_lambda,
-                                            metrop_var_lambda,
-                                            acctot_lambda);
+   if(h_model != 4){
+      
+     //lambda Update
+     Rcpp::List lambda_output = lambda_update(h_model,
+                                              distance_to_ps,
+                                              angle_key,
+                                              x,
+                                              indicator,
+                                              omega,
+                                              kappa,
+                                              beta,
+                                              theta,
+                                              lambda,
+                                              eta,
+                                              a_lambda,
+                                              b_lambda,
+                                              metrop_var_lambda,
+                                              acctot_lambda);
    
-   lambda = Rcpp::as<double>(lambda_output[0]);
-   indicator = Rcpp::as<arma::vec>(lambda_output[1]);
-   acctot_lambda = Rcpp::as<int>(lambda_output[2]);
+     lambda = Rcpp::as<double>(lambda_output[0]);
+     indicator = Rcpp::as<arma::vec>(lambda_output[1]);
+     acctot_lambda = Rcpp::as<int>(lambda_output[2]);
+     
+     }
    
    //eta Update
    Rcpp::List eta_output = eta_update(k_approx,
@@ -329,30 +333,49 @@ for(int j = 1; j < mcmc_samples; ++j){
    if(((j + 1) % int(round(mcmc_samples*0.10)) == 0)){
      
      if(h_model == 0){
-       Rcpp::Rcout << "*************************" << std::endl;
+        
        Rcpp::Rcout << "Indicator" << std::endl;
+       Rcpp::Rcout << "*************************" << std::endl;
+        
        }
      
      if(h_model == 1){
-       Rcpp::Rcout << "*************************" << std::endl;
+       
        Rcpp::Rcout << "Linear" << std::endl;
+       Rcpp::Rcout << "*************************" << std::endl;
+        
        }
      
      if(h_model == 2){
-       Rcpp::Rcout << "*************************" << std::endl;
+       
        Rcpp::Rcout << "Exponential" << std::endl;
-      }
+       Rcpp::Rcout << "*************************" << std::endl;
+        
+       }
      
      if(h_model == 3){
-       Rcpp::Rcout << "*************************" << std::endl;
+        
        Rcpp::Rcout << "Gaussian" << std::endl;
+       Rcpp::Rcout << "*************************" << std::endl;
+        
+       }
+     
+     if(h_model == 4){
+        
+       Rcpp::Rcout << "Spherical" << std::endl;
+       Rcpp::Rcout << "*************************" << std::endl;
+        
        }
      
      double completion = round(100*((j + 1)/(double)mcmc_samples));
      Rcpp::Rcout << "Progress: " << completion << "%" << std::endl;
      
-     double accrate_lambda = round(100*(acctot_lambda/(double)j));
-     Rcpp::Rcout << "lambda Acceptance: " << accrate_lambda << "%" << std::endl;
+     if(h_model != 4){
+        
+       double accrate_lambda = round(100*(acctot_lambda/(double)j));
+       Rcpp::Rcout << "lambda Acceptance: " << accrate_lambda << "%" << std::endl;
+      
+       }
      
      double accrate_eta_min = round(100*(min(acctot_eta)/(double)j));
      Rcpp::Rcout << "eta Acceptance (min): " << accrate_eta_min << "%" << std::endl;
