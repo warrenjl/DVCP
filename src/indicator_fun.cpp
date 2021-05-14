@@ -43,6 +43,6 @@ if(h_model == 3){ //Gaussian
   }
  
 return indicator;
-   
+    
 }
    
