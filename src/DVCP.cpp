@@ -145,6 +145,9 @@ double lambda = 0.01;
 if(lambda_init.isNotNull()){
   lambda = Rcpp::as<double>(lambda_init);
   }
+if(h_model == 4){
+  lambda = 1.00;
+  }
 
 double sigma2_eta = 1.00;
 if(sigma2_eta_init.isNotNull()){
@@ -333,38 +336,23 @@ for(int j = 1; j < mcmc_samples; ++j){
    if(((j + 1) % int(round(mcmc_samples*0.10)) == 0)){
      
      if(h_model == 0){
-        
        Rcpp::Rcout << "Indicator" << std::endl;
-       Rcpp::Rcout << "*************************" << std::endl;
-        
        }
      
      if(h_model == 1){
-       
        Rcpp::Rcout << "Linear" << std::endl;
-       Rcpp::Rcout << "*************************" << std::endl;
-        
        }
      
      if(h_model == 2){
-       
        Rcpp::Rcout << "Exponential" << std::endl;
-       Rcpp::Rcout << "*************************" << std::endl;
-        
        }
      
      if(h_model == 3){
-        
        Rcpp::Rcout << "Gaussian" << std::endl;
-       Rcpp::Rcout << "*************************" << std::endl;
-        
        }
      
      if(h_model == 4){
-        
        Rcpp::Rcout << "Spherical" << std::endl;
-       Rcpp::Rcout << "*************************" << std::endl;
-        
        }
      
      double completion = round(100*((j + 1)/(double)mcmc_samples));
@@ -385,6 +373,8 @@ for(int j = 1; j < mcmc_samples; ++j){
      
      double accrate_phi_eta = round(100*(acctot_phi_eta/(double)j));
      Rcpp::Rcout << "phi_eta Acceptance: " << accrate_phi_eta << "%" << std::endl;
+     
+     Rcpp::Rcout << "*************************" << std::endl;
      
      }
    
