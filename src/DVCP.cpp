@@ -145,9 +145,6 @@ double lambda = 0.01;
 if(lambda_init.isNotNull()){
   lambda = Rcpp::as<double>(lambda_init);
   }
-if(h_model == 4){
-  lambda = 1.00;
-  }
 
 double sigma2_eta = 1.00;
 if(sigma2_eta_init.isNotNull()){
@@ -233,30 +230,26 @@ for(int j = 1; j < mcmc_samples; ++j){
                         beta,
                         sigma2_theta);
    
-   if(h_model != 4){
-      
-     //lambda Update
-     Rcpp::List lambda_output = lambda_update(h_model,
-                                              distance_to_ps,
-                                              angle_key,
-                                              x,
-                                              indicator,
-                                              omega,
-                                              kappa,
-                                              beta,
-                                              theta,
-                                              lambda,
-                                              eta,
-                                              a_lambda,
-                                              b_lambda,
-                                              metrop_var_lambda,
-                                              acctot_lambda);
+   //lambda Update
+   Rcpp::List lambda_output = lambda_update(h_model,
+                                            distance_to_ps,
+                                            angle_key,
+                                            x,
+                                            indicator,
+                                            omega,
+                                            kappa,
+                                            beta,
+                                            theta,
+                                            lambda,
+                                            eta,
+                                            a_lambda,
+                                            b_lambda,
+                                            metrop_var_lambda,
+                                            acctot_lambda);
    
-     lambda = Rcpp::as<double>(lambda_output[0]);
-     indicator = Rcpp::as<arma::vec>(lambda_output[1]);
-     acctot_lambda = Rcpp::as<int>(lambda_output[2]);
-     
-     }
+   lambda = Rcpp::as<double>(lambda_output[0]);
+   indicator = Rcpp::as<arma::vec>(lambda_output[1]);
+   acctot_lambda = Rcpp::as<int>(lambda_output[2]);
    
    //eta Update
    Rcpp::List eta_output = eta_update(k_approx,
@@ -358,12 +351,8 @@ for(int j = 1; j < mcmc_samples; ++j){
      double completion = round(100*((j + 1)/(double)mcmc_samples));
      Rcpp::Rcout << "Progress: " << completion << "%" << std::endl;
      
-     if(h_model != 4){
-        
-       double accrate_lambda = round(100*(acctot_lambda/(double)j));
-       Rcpp::Rcout << "lambda Acceptance: " << accrate_lambda << "%" << std::endl;
-      
-       }
+     double accrate_lambda = round(100*(acctot_lambda/(double)j));
+     Rcpp::Rcout << "lambda Acceptance: " << accrate_lambda << "%" << std::endl;
      
      double accrate_eta_min = round(100*(min(acctot_eta)/(double)j));
      Rcpp::Rcout << "eta Acceptance (min): " << accrate_eta_min << "%" << std::endl;
