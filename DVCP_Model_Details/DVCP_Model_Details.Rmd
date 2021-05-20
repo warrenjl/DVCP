@@ -1,0 +1,76 @@
+---
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+# DVCP: Directionally-Varying Change Points Model
+
+## Statistical Model
+\begin{align}Y_{i} = \textbf{x}\left(\textbf{s}_i\right)^{\text{T}} \boldsymbol{\beta} + \theta h(\left\|\textbf{s}_i - \textbf{p}\right\|) \boldsymbol{1}{\left(\left\|\textbf{s}_i - \textbf{p}\right\| \leq \lambda \exp\left[ \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]\right)} + \epsilon\left(\textbf{s}_i\right),\ i=1,...,n;\end{align}
+$$\epsilon\left(\textbf{s}_i\right)|\sigma^2_{\epsilon} \stackrel{\text{iid}}{\sim} \text{N}\left(0,\sigma^2_\epsilon\right);$$
+
+\begin{align*}\begin{split} &\boldsymbol{\eta} = \left\{\eta\left(\text{z}_1\right), \hdots, \eta\left(\text{z}_m\right) \right\}^{\text{T}} | \sigma^2_{\eta}, \phi_{\eta} \sim \text{MVN}\left\{\boldsymbol{0}_m, \sigma^2_{\eta} \Sigma\left(\phi_{\eta}\right)\right\},\\
+&\Sigma\left(\phi_{\eta}\right)_{ij} = \exp\left[-\phi_{\eta}\min\left\{|\text{z}_i - \text{z}_j|,\ 2\pi - \max\left(\text{z}_i, \text{z}_j\right) + \min\left(\text{z}_i, \text{z}_j\right)\right\}\right]\end{split}\end{align*}
+
+* $\textbf{p}$:  Location of the point source;
+
+*  $a_p\left(\textbf{s}_i\right)$:  Angle of separation between $\textbf{s}_i$ and $\textbf{p}$ in degrees (with respect to the imaginary horizontal line extending through $\textbf{p}$), measured counterclockwise; 
+
+* $m$:  Number of unique angles.
+
+## $h\left(||\textbf{s}_i - \textbf{p}||\right)$ Options
+  
+* Indicator (h_model = 0):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|\right) = 1$ for all $i$;
+
+* Linear (h_model =   1):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|\right) = \max\left\{\left\|\textbf{s}_i - \textbf{p}\right\|; i=1,\hdots,n\right\} - \left\|\textbf{s}_i - \textbf{p}\right\|$;
+  
+* Exponential (h_model = 2):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|\right) = \exp\left\{-\left\|\textbf{s}_i - \textbf{p}\right\|\right\}$;
+  
+* Gaussian (h_model = 3):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|\right) = \exp\left\{-\left\|\textbf{s}_i - \textbf{p}\right\|^2\right\}$;
+
+* Spherical (h_model = 4):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|; \lambda, \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right) = 1 - 1.5 \frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]} + 0.5\left(\frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]}\right)^3$;
+
+  * Note:  The spherical option includes a directionally-varying rate of decay within the change point buffer.
+
+## Prior Information
+$\theta, \beta_j \stackrel{\text{iid}}{\sim}\text{N}\left(0, \sigma^2_{\beta}\right),\ j=1,...,p_{\text{x}};$
+
+* $p_{\text{x}}$: Length of $\textbf{x}\left(\textbf{s}_i\right)$ vector (same for all $i$);
+
+* Default setting: $\sigma^2_{\beta} = 10,000.$
+
+$\lambda \sim \text{Beta}\left(\alpha_{\lambda}, \beta_{\lambda}\right)$
+
+* Default setting: $\alpha_{\lambda} = \beta_{\lambda} = 1$
+
+$\sigma^2_{\epsilon}, \sigma^2_{\eta} \stackrel{\text{iid}}{\sim} \text{Inverse Gamma}\left(\alpha_{\sigma^2}, \beta_{\sigma^2}\right)$
+
+* Default setting:  $\alpha_{\sigma^2} = \beta_{\sigma^2} = 0.01$
+
+$\phi_{\eta} \stackrel{\text{iid}}{\sim}\text{Gamma}\left(\alpha_{\phi_{\eta}}, \beta_{\phi_{\eta}}\right);$
+
+* Default setting: $\alpha_{\phi_{\eta}} = 1$, $\beta_{\phi_{\eta}} = 1.$
+
+## Default Initial Values
+* $\beta_j = 0$ for all $j$;
+
+* $\theta = 1$;
+
+* $\lambda = 0.01$;
+
+* $\sigma^2_{\epsilon} = \sigma^2_{\eta} = 1$;
+
+* $\phi_{\eta} = 1$.
+
+## Additional Notes
+*  The Gaussian predictive process approximation is used during model fitting where the user must input the $k << m$ approximation angles.
+
+## Alternate Likelihood
+$$Y\left(\textbf{s}_i\right)|p\left(\textbf{s}_i\right) \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left\{p\left(\textbf{s}_i\right)\right\},\ i=1,...,n.$$
+$$\text{logit}\left\{p\left(\textbf{s}_i\right)\right\} = \textbf{x}\left(\textbf{s}_i\right)^{\text{T}} \boldsymbol{\beta} + \theta h(\left\|\textbf{s}_i - \textbf{p}\right\|) \boldsymbol{1}{\left(\left\|\textbf{s}_i - \textbf{p}\right\| \leq \lambda \exp\left[ \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]\right)}$$
+
+
+* likelihood_indicator $= 0$: Bernoulli; 
+
+* likelihood_indicator $= 1$: Gaussian.
