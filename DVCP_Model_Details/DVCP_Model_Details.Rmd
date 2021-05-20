@@ -29,7 +29,7 @@ $$\epsilon\left(\textbf{s}_i\right)|\sigma^2_{\epsilon} \stackrel{\text{iid}}{\s
   
 * Gaussian (h_model = 3):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|\right) = \exp\left\{-\left\|\textbf{s}_i - \textbf{p}\right\|^2\right\}$;
 
-* Spherical (h_model = 4):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|; \lambda, \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right) = 1 - 1.5 \frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]} + 0.5\left(\frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]}\right)^3$;
+* Spherical (h_model = 4):  $h\left(\left\|\textbf{s}_i - \textbf{p}\right\|; \lambda, \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right) = 1 - 1.5\left(\frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]}\right) + 0.5\left(\frac{\left\|\textbf{s}_i - \textbf{p}\right\|}{\lambda\exp\left[\eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]}\right)^3$;
 
   * Note:  The spherical option includes a directionally-varying rate of decay within the change point buffer.
 
