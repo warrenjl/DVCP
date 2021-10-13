@@ -15,7 +15,8 @@ Rcpp::List omega_update(arma::vec y,
 arma::vec mean_omega = x*beta +
                        theta*indicator;
 
-arma::vec omega = rcpp_pgdraw(1.00,
+arma::vec input(1); input.fill(1.00);
+arma::vec omega = rcpp_pgdraw(input,
                               mean_omega);
 
 arma::vec kappa = (y - 0.50)/omega;

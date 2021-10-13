@@ -7,7 +7,7 @@ arma::vec indicator_fun(int h_model,
                         double lambda,
                         arma::vec eta);
 
-arma::vec rcpp_pgdraw(double b, 
+arma::vec rcpp_pgdraw(arma::vec b, 
                       arma::vec c);
 
 double sigma2_epsilon_update(arma::vec y,

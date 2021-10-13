@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // DVCP
 Rcpp::List DVCP(int mcmc_samples, int burnin, int thin, int adapt, int likelihood_indicator, int h_model, arma::vec approx_angles, arma::vec y, arma::mat x, arma::vec distance_to_ps, arma::vec unique_angles, arma::vec angle_key, double metrop_var_lambda, arma::vec metrop_var_eta, double metrop_var_phi_eta, double adapt_lambda, double adapt_eta, double adapt_phi_eta, Rcpp::Nullable<double> alpha_sigma2_epsilon_prior, Rcpp::Nullable<double> beta_sigma2_epsilon_prior, Rcpp::Nullable<double> sigma2_beta_prior, Rcpp::Nullable<double> sigma2_theta_prior, Rcpp::Nullable<double> a_lambda_prior, Rcpp::Nullable<double> b_lambda_prior, Rcpp::Nullable<double> alpha_sigma2_eta_prior, Rcpp::Nullable<double> beta_sigma2_eta_prior, Rcpp::Nullable<double> alpha_phi_eta_prior, Rcpp::Nullable<double> beta_phi_eta_prior, Rcpp::Nullable<double> sigma2_epsilon_init, Rcpp::Nullable<Rcpp::NumericVector> beta_init, Rcpp::Nullable<double> theta_init, Rcpp::Nullable<double> lambda_init, Rcpp::Nullable<double> sigma2_eta_init, Rcpp::Nullable<double> phi_eta_init);
 RcppExport SEXP _DVCP_DVCP(SEXP mcmc_samplesSEXP, SEXP burninSEXP, SEXP thinSEXP, SEXP adaptSEXP, SEXP likelihood_indicatorSEXP, SEXP h_modelSEXP, SEXP approx_anglesSEXP, SEXP ySEXP, SEXP xSEXP, SEXP distance_to_psSEXP, SEXP unique_anglesSEXP, SEXP angle_keySEXP, SEXP metrop_var_lambdaSEXP, SEXP metrop_var_etaSEXP, SEXP metrop_var_phi_etaSEXP, SEXP adapt_lambdaSEXP, SEXP adapt_etaSEXP, SEXP adapt_phi_etaSEXP, SEXP alpha_sigma2_epsilon_priorSEXP, SEXP beta_sigma2_epsilon_priorSEXP, SEXP sigma2_beta_priorSEXP, SEXP sigma2_theta_priorSEXP, SEXP a_lambda_priorSEXP, SEXP b_lambda_priorSEXP, SEXP alpha_sigma2_eta_priorSEXP, SEXP beta_sigma2_eta_priorSEXP, SEXP alpha_phi_eta_priorSEXP, SEXP beta_phi_eta_priorSEXP, SEXP sigma2_epsilon_initSEXP, SEXP beta_initSEXP, SEXP theta_initSEXP, SEXP lambda_initSEXP, SEXP sigma2_eta_initSEXP, SEXP phi_eta_initSEXP) {
@@ -199,12 +204,12 @@ BEGIN_RCPP
 END_RCPP
 }
 // rcpp_pgdraw
-arma::vec rcpp_pgdraw(double b, arma::vec c);
+arma::vec rcpp_pgdraw(arma::vec b, arma::vec c);
 RcppExport SEXP _DVCP_rcpp_pgdraw(SEXP bSEXP, SEXP cSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type b(bSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type c(cSEXP);
     rcpp_result_gen = Rcpp::wrap(rcpp_pgdraw(b, c));
     return rcpp_result_gen;

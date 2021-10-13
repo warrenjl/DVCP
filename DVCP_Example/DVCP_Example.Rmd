@@ -13,8 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 [1] Install Packages:
 
 ```{r}
-library(devtools)
-install_github("warrenjl/DVCP")
 library(DVCP)
 library(mnormt)
 ```
