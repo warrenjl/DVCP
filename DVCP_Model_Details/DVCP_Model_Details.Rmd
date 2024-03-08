@@ -67,10 +67,10 @@ $\phi_{\eta} \stackrel{\text{iid}}{\sim}\text{Gamma}\left(\alpha_{\phi_{\eta}}, 
 *  The Gaussian predictive process approximation is used during model fitting where the user must input the $k << m$ approximation angles.
 
 ## Alternate Likelihood
-$$Y\left(\textbf{s}_i\right)|p\left(\textbf{s}_i\right) \stackrel{\text{ind}}{\sim} \text{Bernoulli}\left\{p\left(\textbf{s}_i\right)\right\},\ i=1,...,n.$$
+$$Y\left(\textbf{s}_i\right)|p\left(\textbf{s}_i\right) \stackrel{\text{ind}}{\sim} \text{Binomical}\left\{c\left(\textbf{s}_i\right), p\left(\textbf{s}_i\right)\right\},\ i=1,...,n.$$
 $$\text{logit}\left\{p\left(\textbf{s}_i\right)\right\} = \textbf{x}\left(\textbf{s}_i\right)^{\text{T}} \boldsymbol{\beta} + \theta h(\left\|\textbf{s}_i - \textbf{p}\right\|) \boldsymbol{1}{\left(\left\|\textbf{s}_i - \textbf{p}\right\| \leq \lambda \exp\left[ \eta\left\{a_p\left(\textbf{s}_i\right)\right\}\right]\right)}$$
 
 
-* likelihood_indicator $= 0$: Bernoulli; 
+* likelihood_indicator $= 0$: Binomial; 
 
 * likelihood_indicator $= 1$: Gaussian.

@@ -8,6 +8,7 @@ using namespace Rcpp;
 
 Rcpp::List omega_update(arma::vec y,
                         arma::mat x,
+                        arma::vec tri_als,
                         arma::vec indicator,
                         arma::vec beta,
                         double theta){
@@ -15,11 +16,11 @@ Rcpp::List omega_update(arma::vec y,
 arma::vec mean_omega = x*beta +
                        theta*indicator;
 
-arma::vec input(1); input.fill(1.00);
+arma::vec input = tri_als;
 arma::vec omega = rcpp_pgdraw(input,
                               mean_omega);
 
-arma::vec kappa = (y - 0.50)/omega;
+arma::vec kappa = (y - 0.50*tri_als)/omega;
 
 return Rcpp::List::create(Rcpp::Named("omega") = omega,
                           Rcpp::Named("kappa") = kappa);

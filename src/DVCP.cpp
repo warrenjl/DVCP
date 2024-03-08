@@ -24,6 +24,7 @@ Rcpp::List DVCP(int mcmc_samples,
                 double adapt_lambda,
                 double adapt_eta,
                 double adapt_phi_eta,
+                Rcpp::Nullable<Rcpp::NumericVector> trials = R_NilValue,
                 Rcpp::Nullable<double> alpha_sigma2_epsilon_prior = R_NilValue,
                 Rcpp::Nullable<double> beta_sigma2_epsilon_prior = R_NilValue,
                 Rcpp::Nullable<double> sigma2_beta_prior = R_NilValue,
@@ -54,6 +55,11 @@ arma::mat eta_keep(m, (mcmc_samples - burnin)/thin); eta_keep.fill(0.00);
 arma::vec sigma2_eta_keep((mcmc_samples - burnin)/thin); sigma2_eta_keep.fill(0.00);
 arma::vec phi_eta_keep((mcmc_samples - burnin)/thin); phi_eta_keep.fill(0.00);
 arma::vec neg_two_loglike_keep((mcmc_samples - burnin)/thin); neg_two_loglike_keep.fill(0.00);
+
+arma::vec tri_als(n); tri_als.fill(1);
+if(trials.isNotNull()){
+  tri_als = Rcpp::as<arma::vec>(trials);
+  }
 
 //Approximation Information
 arma::mat d_a_approx(k_approx, k_approx); d_a_approx.fill(0.00);
@@ -191,6 +197,7 @@ for(int j = 1; j < mcmc_samples; ++j){
      //omega Update
      Rcpp::List omega_output = omega_update(y,
                                             x,
+                                            tri_als,
                                             indicator,
                                             beta,
                                             theta);
