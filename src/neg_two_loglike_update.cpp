@@ -9,6 +9,7 @@ using namespace Rcpp;
 double neg_two_loglike_update(int likelihood_indicator,
                               arma::vec y,
                               arma::mat x,
+                              arma::vec tri_als,
                               arma::vec indicator,
                               double sigma2_epsilon, 
                               arma::vec beta,
@@ -25,7 +26,7 @@ if(likelihood_indicator == 0){ //Bernoulli
   arma::vec probs = exp(mu)/(1.00 + exp(mu));
   for(int j = 0; j < n; ++j){
      dens(j) = R::dbinom(y(j),
-                         1,
+                         tri_als(j),
                          probs(j),
                          TRUE);
      }

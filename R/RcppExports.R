@@ -21,8 +21,8 @@ lambda_update <- function(h_model, distance_to_ps, angle_key, x, indicator, omeg
     .Call(`_DVCP_lambda_update`, h_model, distance_to_ps, angle_key, x, indicator, omega, kappa, beta, theta, lambda, eta, a_lambda, b_lambda, metrop_var_lambda, acctot_lambda)
 }
 
-neg_two_loglike_update <- function(likelihood_indicator, y, x, indicator, sigma2_epsilon, beta, theta) {
-    .Call(`_DVCP_neg_two_loglike_update`, likelihood_indicator, y, x, indicator, sigma2_epsilon, beta, theta)
+neg_two_loglike_update <- function(likelihood_indicator, y, x, tri_als, indicator, sigma2_epsilon, beta, theta) {
+    .Call(`_DVCP_neg_two_loglike_update`, likelihood_indicator, y, x, tri_als, indicator, sigma2_epsilon, beta, theta)
 }
 
 omega_update <- function(y, x, tri_als, indicator, beta, theta) {

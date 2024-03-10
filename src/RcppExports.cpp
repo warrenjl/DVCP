@@ -142,19 +142,20 @@ BEGIN_RCPP
 END_RCPP
 }
 // neg_two_loglike_update
-double neg_two_loglike_update(int likelihood_indicator, arma::vec y, arma::mat x, arma::vec indicator, double sigma2_epsilon, arma::vec beta, double theta);
-RcppExport SEXP _DVCP_neg_two_loglike_update(SEXP likelihood_indicatorSEXP, SEXP ySEXP, SEXP xSEXP, SEXP indicatorSEXP, SEXP sigma2_epsilonSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
+double neg_two_loglike_update(int likelihood_indicator, arma::vec y, arma::mat x, arma::vec tri_als, arma::vec indicator, double sigma2_epsilon, arma::vec beta, double theta);
+RcppExport SEXP _DVCP_neg_two_loglike_update(SEXP likelihood_indicatorSEXP, SEXP ySEXP, SEXP xSEXP, SEXP tri_alsSEXP, SEXP indicatorSEXP, SEXP sigma2_epsilonSEXP, SEXP betaSEXP, SEXP thetaSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type likelihood_indicator(likelihood_indicatorSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type y(ySEXP);
     Rcpp::traits::input_parameter< arma::mat >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type tri_als(tri_alsSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type indicator(indicatorSEXP);
     Rcpp::traits::input_parameter< double >::type sigma2_epsilon(sigma2_epsilonSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type beta(betaSEXP);
     Rcpp::traits::input_parameter< double >::type theta(thetaSEXP);
-    rcpp_result_gen = Rcpp::wrap(neg_two_loglike_update(likelihood_indicator, y, x, indicator, sigma2_epsilon, beta, theta));
+    rcpp_result_gen = Rcpp::wrap(neg_two_loglike_update(likelihood_indicator, y, x, tri_als, indicator, sigma2_epsilon, beta, theta));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -271,7 +272,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_DVCP_eta_update", (DL_FUNC) &_DVCP_eta_update, 19},
     {"_DVCP_indicator_fun", (DL_FUNC) &_DVCP_indicator_fun, 5},
     {"_DVCP_lambda_update", (DL_FUNC) &_DVCP_lambda_update, 15},
-    {"_DVCP_neg_two_loglike_update", (DL_FUNC) &_DVCP_neg_two_loglike_update, 7},
+    {"_DVCP_neg_two_loglike_update", (DL_FUNC) &_DVCP_neg_two_loglike_update, 8},
     {"_DVCP_omega_update", (DL_FUNC) &_DVCP_omega_update, 6},
     {"_DVCP_phi_eta_update", (DL_FUNC) &_DVCP_phi_eta_update, 21},
     {"_DVCP_rcpp_pgdraw", (DL_FUNC) &_DVCP_rcpp_pgdraw, 2},
